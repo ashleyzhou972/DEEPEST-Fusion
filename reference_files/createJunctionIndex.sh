@@ -38,7 +38,7 @@ else
   GENE_NAME_2=gene_id
 fi
 
-python makeJunctionsAndWriteFasta.py -w ${WINDOW} -e ${OUT_DIR}/exons -r ${OUT_DIR}/records -f ${OUT_DIR}/fastas -n1 ${GENE_NAME_1} -n2 ${GENE_NAME_2} -v
+python2 makeJunctionsAndWriteFasta.py -w ${WINDOW} -e ${OUT_DIR}/exons -r ${OUT_DIR}/records -f ${OUT_DIR}/fastas -n1 ${GENE_NAME_1} -n2 ${GENE_NAME_2} -v
 
 # combine into single file, using xargs method to avoid argument list too long error in bash
 
@@ -51,9 +51,9 @@ cat ${OUT_DIR}/fastas/*.fa > ${OUT_DIR}/${FILE_ID}.fa  # combine into single fil
 #ls ${OUT_DIR}/fastas | xargs -n 32 -P 8 cat >> ${OUT_DIR}/${FILE_ID}.fa
 
 # split the junctions into files containing only reg, only rev, and only dup junctions
-python limitFasta.py -s ${OUT_DIR}/${FILE_ID}.fa -o ${OUT_DIR}/fastas/ -t reg -p _junctions_reg
-python limitFasta.py -s ${OUT_DIR}/${FILE_ID}.fa -o ${OUT_DIR}/fastas/ -t dup -p _junctions_dup
-python limitFasta.py -s ${OUT_DIR}/${FILE_ID}.fa -o ${OUT_DIR}/fastas/ -t rev -p _junctions_rev
+python2 limitFasta.py -s ${OUT_DIR}/${FILE_ID}.fa -o ${OUT_DIR}/fastas/ -t reg -p _junctions_reg -v
+python2 limitFasta.py -s ${OUT_DIR}/${FILE_ID}.fa -o ${OUT_DIR}/fastas/ -t dup -p _junctions_dup -v
+python2 limitFasta.py -s ${OUT_DIR}/${FILE_ID}.fa -o ${OUT_DIR}/fastas/ -t rev -p _junctions_rev -v
 
 # combine rev and dup junctions into scrambled fasta file and put in the pipeline index
 echo "cat ${OUT_DIR}/fastas/${FILE_ID}_junctions_rev.fa ${OUT_DIR}/fastas/${FILE_ID}_junctions_dup.fa > ${PIPELINE_DIR}/index/${FILE_ID}_junctions_scrambled.fa"
@@ -63,8 +63,8 @@ cat ${OUT_DIR}/fastas/${FILE_ID}_junctions_rev.fa ${OUT_DIR}/fastas/${FILE_ID}_j
 mv ${OUT_DIR}/fastas/${FILE_ID}_junctions_reg.fa ${PIPELINE_DIR}/index
 
 # remove the temp fastas created along the way
-rm ${OUT_DIR}/${FILE_ID}.fa
-rm -r ${OUT_DIR}/fastas/
+#rm ${OUT_DIR}/${FILE_ID}.fa
+#rm -r ${OUT_DIR}/fastas/
 
 # create scrambled junction bowtie2 index in index directory
 echo "bowtie2-build ${PIPELINE_DIR}/index/${FILE_ID}_junctions_scrambled.fa ${PIPELINE_DIR}/index/${FILE_ID}_junctions_scrambled"
