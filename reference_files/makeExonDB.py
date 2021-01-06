@@ -14,7 +14,7 @@
 import argparse
 from Bio import SeqIO
 from BCBio import GFF
-import cPickle as pickle
+import pickle
 import utils_os
 import sys
 
@@ -73,7 +73,7 @@ def parseChrFeatures(chrSeqRecord):
             else:
                 # this is a single exon gene so gene name is in the feature instead of subfeatures
                 if args.verbose:
-                    print "single exon gene " + str(getGeneName(ftr))
+                    print(("single exon gene " + str(getGeneName(ftr))))
                 geneExons[getGeneName(ftr)] = gene(chrSeqRecord.id, ftr)
                 # and need to add the feature to the appropriate exonDict
                 if ftr.strand == 1:
@@ -81,10 +81,10 @@ def parseChrFeatures(chrSeqRecord):
                 else:
                     exonsNeg[(int(ftr.location.start), int(ftr.location.end), ftr.qualifiers["gene_name"][0])] = ftr
         except Exception as e:
-            print "Exception"
-            print e
-            print "error:", sys.exc_info()[0]
-            print "parsing features for", ftr
+            print("Exception")
+            print(e)
+            print(("error:", sys.exc_info()[0]))
+            print(("parsing features for", ftr))
 
     if len(exonsPos) > 0:
         chrExonsByDirection.append(
@@ -98,7 +98,7 @@ def parseChrFeatures(chrSeqRecord):
     pk_geneExons.close()
 
     if args.verbose:
-        print "num genes: " + str(len(geneExons))
+        print(("num genes: " + str(len(geneExons))))
 
     pk_exonsByDirection = open(exonOutFullPath + '/exonsByStrand_' + chrSeqRecord.id + '.pkl', 'wb')
     pickle.dump(chrExonsByDirection, pk_exonsByDirection)
@@ -106,9 +106,9 @@ def parseChrFeatures(chrSeqRecord):
 
     if args.verbose:
         for elem in chrExonsByDirection:
-            print "chromosome:" + str(elem[0])
-            print "strand: " + str(elem[1])
-            print "number of exons: " + str(len(elem[2]))
+            print(("chromosome:" + str(elem[0])))
+            print(("strand: " + str(elem[1])))
+            print(("number of exons: " + str(len(elem[2]))))
 
     pk_rec = open(recOutFullPath + '/rec_' + chrSeqRecord.id + '.pkl', 'wb')
     pickle.dump(chrSeqRecord, pk_rec)
@@ -148,27 +148,27 @@ if __name__ == "__main__":
     utils_os.createDirectory(recOutFullPath)
 
     # read in the sequences
-    f_handle = open(args.fastaFile, "rU")
+    f_handle = open(args.fastaFile, "r")
     f_dict = SeqIO.to_dict(SeqIO.parse(f_handle, "fasta"))
     f_handle.close()
 
     # only want exons for now. unfortunately can't limit by strand so have to do that after the fact
     # we can speed things up a bit by limiting to just the chromosomes we have sequences for
     limit_info = dict(
-        gff_id=f_dict.keys(),
+        gff_id=list(f_dict.keys()),
         gff_type=["exon"])
 
     if args.verbose:
-        print "data we are searching for in gff: " + str(limit_info)
+        print(("data we are searching for in gff: " + str(limit_info)))
 
     ########### read in the annotations, adding annotations to the sequences
-    a_handle = open(args.annotationFile, "rU")
+    a_handle = open(args.annotationFile, "r")
     if args.verbose:
-        print "opening annotation file", args.annotationFile
+        print(("opening annotation file", args.annotationFile))
     for rec in GFF.parse(a_handle, base_dict=f_dict,
                          limit_info=limit_info):  # each rec is a SeqRecord (for 1 chromosome)
         if args.verbose:
-            print "####### starting new chromosome: " + str(rec.id)
+            print(("####### starting new chromosome: " + str(rec.id)))
         # populate the data structures with genes and exons from this chromosome and pickle the objects
         parseChrFeatures(rec)
     a_handle.close()

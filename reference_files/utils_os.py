@@ -8,7 +8,7 @@ def createDirectory(dirPath):
     try:
         if not os.path.isdir(dirPath):
             os.makedirs(dirPath)
-    except OSError, e:
+    except OSError as e:
         if e.errno != errno.EEXIST:
             raise
 
@@ -19,7 +19,7 @@ def getFileId(patt, grp, filename):
     if match:
         return match.group(grp)
     else:
-        print "filename not structured correctly: " + str(filename)
+        print(("filename not structured correctly: " + str(filename)))
 
 
 # good way to grep, particularly for large files

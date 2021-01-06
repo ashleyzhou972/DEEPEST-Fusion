@@ -11,13 +11,13 @@ args = parser.parse_args()
 p = float(args.probability)
 counter = 0
 MaxInDel = 5
-f1 = open(args.input_file, mode = "rU")
+f1 = open(args.input_file, mode = "r")
 
 for i in range(1, int(MaxInDel) + 1):
     f1.seek(0)
 
     fout = open(args.reference_name + "_reg_indels_" + str(i) + ".fa", mode="w")
-    print "writing indels" + str(i) + ".fa"
+    print("writing indels" + str(i) + ".fa")
 
     for line_raw in f1:
 
