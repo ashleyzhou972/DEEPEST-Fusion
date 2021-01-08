@@ -94,14 +94,14 @@ def parseChrFeatures(chrSeqRecord):
 
     ########### save these objects for future use #############
     pk_geneExons = open(geneOutFullPath + '/geneExons_' + chrSeqRecord.id + '.pkl', 'wb')
-    pickle.dump(geneExons, pk_geneExons)
+    pickle.dump(geneExons, pk_geneExons, protocol=2)
     pk_geneExons.close()
 
     if args.verbose:
         print(("num genes: " + str(len(geneExons))))
 
     pk_exonsByDirection = open(exonOutFullPath + '/exonsByStrand_' + chrSeqRecord.id + '.pkl', 'wb')
-    pickle.dump(chrExonsByDirection, pk_exonsByDirection)
+    pickle.dump(chrExonsByDirection, pk_exonsByDirection, protocol=2)
     pk_exonsByDirection.close()
 
     if args.verbose:
@@ -111,7 +111,7 @@ def parseChrFeatures(chrSeqRecord):
             print(("number of exons: " + str(len(elem[2]))))
 
     pk_rec = open(recOutFullPath + '/rec_' + chrSeqRecord.id + '.pkl', 'wb')
-    pickle.dump(chrSeqRecord, pk_rec)
+    pickle.dump(chrSeqRecord, pk_rec, protocol=2)
     pk_rec.close()
 
 
