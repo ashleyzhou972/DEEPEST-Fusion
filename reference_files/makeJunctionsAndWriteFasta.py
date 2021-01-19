@@ -25,7 +25,7 @@
 import argparse
 from Bio import SeqIO
 from itertools import product
-import _pickle as pickle
+import pickle as pickle
 import os
 import utils_os
 import re
@@ -196,4 +196,5 @@ if __name__ == "__main__":
             if patt_exonfile.search(exonObj):  # only parse if this is an exon pickled file
                 fileId = utils_os.getFileId(patt_exonfilename, 1,
                                             exonObj)  # usually something like chr# which is in the name of each created file
-                createJunctions(fileId, exonObj)
+                if fileId == 'MT':
+                    createJunctions(fileId, exonObj)

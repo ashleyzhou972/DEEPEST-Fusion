@@ -1,0 +1,133 @@
+{
+    "bowtie_index_archive_genome":
+    {
+        "class" : "File",
+        "path": "/home/ec2-user/data/bio-6070-deepest/get_reference/grch38_88/final_tar/grch38_88_genome.bowtie2.tar",
+        "metadata": {
+            "reference_genome": "grch38_88_genome"
+        }
+    },
+    
+    "bowtie_index_archive_regular_junctions":
+    {
+        "class" : "File",
+        "path": "/home/ec2-user/data/bio-6070-deepest/get_reference/grch38_88/final_tar/grch38_88_annot_junctions_reg.tar",
+        "metadata": {
+            "reference_genome": "grch38_88_annot_junctions_reg"
+        }
+    },
+    
+    "bowtie_index_archive_scrambled_junctions":
+    {
+        "class" : "File",
+        "path": "/home/ec2-user/data/bio-6070-deepest/get_reference/grch38_88/final_tar/grch38_88_annot_junctions_scrambled.tar",
+        "metadata": {
+            "reference_genome": "grch38_88_annot_junctions_scrambled"
+        }
+    },
+    
+    
+    "bowtie_index_archive_ribosomal":
+    {
+        "class" : "File",
+        "path": "/home/ec2-user/data/bio-6070-deepest/get_reference/grch38_88/final_tar/grch38_88_ribo.bowtie2.tar",
+        "metadata": {
+                "reference_genome": "grch38_88_ribo"
+            }
+    },
+    
+    "bowtie_index_archive_transcriptome":
+    {
+        "class" : "File",
+        "path": "/home/ec2-user/data/bio-6070-deepest/get_reference/grch38_88/final_tar/grch38_88_transcripts.bowtie2.tar",
+        "metadata": {
+                "reference_genome": "grch38_88_transcripts"
+            }
+    },
+    
+    "bowtie_index_archive_regular_indels":[
+        {
+            "class" : "File",
+            "path": "/home/ec2-user/data/bio-6070-deepest/get_reference/grch38_88/final_tar/grch38_88_junction_indel_reg_indels_1.tar",
+            "metadata": {
+                "reference_genome": "grch38_88_junction_indel_reg_indels_1"
+            }
+        },
+        {
+            "class" : "File",
+            "path": "/home/ec2-user/data/bio-6070-deepest/get_reference/grch38_88/final_tar/grch38_88_junction_indel_reg_indels_2.tar",
+            "metadata": {
+                "reference_genome": "grch38_88_junction_indel_reg_indels_2"
+            }
+        },
+        {
+            "class" : "File",
+            "path": "/home/ec2-user/data/bio-6070-deepest/get_reference/grch38_88/final_tar/grch38_88_junction_indel_reg_indels_3.tar",
+            "metadata": {
+                "reference_genome": "grch38_88_junction_indel_reg_indels_3"
+            }
+        },
+        {
+            "class" : "File",
+            "path": "/home/ec2-user/data/bio-6070-deepest/get_reference/grch38_88/final_tar/grch38_88_junction_indel_reg_indels_4.tar",
+            "metadata": {
+                "reference_genome": "grch38_88_junction_indel_reg_indels_4"
+            }
+        },
+        {
+            "class" : "File",
+            "path": "/home/ec2-user/data/bio-6070-deepest/get_reference/grch38_88/final_tar/grch38_88_junction_indel_reg_indels_5.tar",
+            "metadata": {
+                "reference_genome": "grch38_88_junction_indel_reg_indels_5"
+            }
+        }
+    ],
+    
+    "fastq_files" : [
+        {
+           "class" : "File",
+           "path": "/home/ec2-user/data/bio-6070-deepest/samples/RAD-19443-A_T_S_R_RS/RAD-19443-A_T_S_R_RS_T_1.fastq.gz",
+           "metadata": {
+               "paired_end" : "1",
+               "sample_id" : "RAD-19443-A_T_S_R_RS_T"
+           }
+        },
+        {
+           "class" : "File",
+           "path": "/home/ec2-user/data/bio-6070-deepest/samples/RAD-19443-A_T_S_R_RS/RAD-19443-A_T_S_R_RS_T_2.fastq.gz",
+           "metadata": {
+               "paired_end" : "2",
+               "sample_id" : "RAD-19443-A_T_S_R_RS_T"
+           }
+        }
+    ],
+    
+    "pickle_tar" :
+    {
+        "class" : "File",
+        "path": "/home/ec2-user/data/bio-6070-deepest/get_reference/grch38_88/final_tar/grch38-88-annot3.tar.gz"
+    },
+    
+    "MACHETE_Known_Fusions":
+    {
+        "class" : "File",
+        "path": "/home/ec2-user/data/bio-6070-deepest/get_reference/grch38_88/final_tar/grch38_88_known_fusions.bowtie2.tar",
+        "metadata": {
+                "reference_genome": "grch38_88_known_fusions"
+            }
+    },
+    
+    
+    
+    "known_fusions":
+    {
+        "class" : "File",
+        "path": "/home/ec2-user/data/bio-6070-deepest/get_reference/grch38_88/final_tar/known_fusions.pickle"
+        
+    },
+
+    "skip_trimming": true,
+    "window": 2000
+    
+    
+}

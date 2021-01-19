@@ -3180,7 +3180,7 @@
           },
           {
             "label": "Large index",
-            "sbg:toolDefaultValue": "False",
+            "sbg:toolDefaultValue": "True",
             "sbg:category": "Basic Options",
             "description": "Force indexer to build a large index, even if the reference is less than ~ 4 billion nucleotides inlong.",
             "inputBinding": {
@@ -3342,7 +3342,7 @@
       "inputs": [
         {
           "id": "#MACHETE_Bowtie2_Indexer_Indels.threads",
-          "default": 32
+          "default": 8
         },
         {
           "id": "#MACHETE_Bowtie2_Indexer_Indels.suffixes_as_fraction"
@@ -4480,7 +4480,7 @@
       "inputs": [
         {
           "id": "#MACHETE_Bowtie2_2_3_4_1_Indexer_Far_Junctions.threads",
-          "default": 32
+          "default": 8
         },
         {
           "id": "#MACHETE_Bowtie2_2_3_4_1_Indexer_Far_Junctions.suffixes_as_fraction"
@@ -5783,7 +5783,7 @@
           },
           {
             "label": "Large index",
-            "sbg:toolDefaultValue": "False",
+            "sbg:toolDefaultValue": "True",
             "sbg:category": "Basic Options",
             "description": "Force indexer to build a large index, even if the reference is less than ~ 4 billion nucleotides inlong.",
             "inputBinding": {
@@ -5945,7 +5945,7 @@
       "inputs": [
         {
           "id": "#MACHETE_Bowtie2_Indexer_Filtered_FJ.threads",
-          "default": 32
+          "default": 8
         },
         {
           "id": "#MACHETE_Bowtie2_Indexer_Filtered_FJ.suffixes_as_fraction"
