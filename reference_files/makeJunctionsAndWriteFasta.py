@@ -25,7 +25,7 @@
 import argparse
 from Bio import SeqIO
 from itertools import product
-import cPickle as pickle
+import pickle as pickle
 import os
 import utils_os
 import re
@@ -72,10 +72,10 @@ def writeAllPairs(curSeqRec, id, allExons, curExons, junctions, handle):
                     handle.write(str(curJunc.printHeader(args.name1, args.name2)))  # junction fasta header
                     handle.write(str(curJunc))  # prints out the sequence
         except Exception as e:
-            print "Exception"
-            print e
-            print "error:", sys.exc_info()[0]
-            print "parsing features for", a, b
+            print("Exception")
+            print(e)
+            print("error:", sys.exc_info()[0])
+            print("parsing features for", a, b)
 
     return junctions
 
@@ -94,26 +94,26 @@ def writeAllPairs(curSeqRec, id, allExons, curExons, junctions, handle):
 # param exonFile: name of the exon file for this chromosome
 def createJunctions(fileId, exonFile):
     if args.verbose:
-        print fileId
+        print(fileId)
 
     # get the sequence record for this chromosome (exons just contain annotation data)
-    exonSeqRec = pickle.load(open(args.recordDir + '/rec_' + fileId + '.pkl', 'rb'))
+    exonSeqRec = pickle.load(open(args.recordDir + '/rec_' + fileId + '.pkl', 'rb'), encoding='latin1')
 
     # and get the exons that belong to this sequence
-    chrExonsByDirection = pickle.load(open(args.exonDir + '/' + exonFile, 'rb'))
+    chrExonsByDirection = pickle.load(open(args.exonDir + '/' + exonFile, 'rb'), encoding='latin1')
 
     allJunctions = {}  # (endExon1, startExon2) identifier to keep track of which junctions we have done already
 
     if args.verbose:
-        print len(chrExonsByDirection)
+        print(len(chrExonsByDirection))
 
-    outf = open(args.fastaDir + '/' + fileId + '_junctions.fa', 'wb')
+    outf = open(args.fastaDir + '/' + fileId + '_junctions.fa', 'w')
 
     # there should be 2 elems in each file, 1 for + strand exons and 1 for - strand exons
     for elem in chrExonsByDirection:
         chrId, strand, exons = elem
 
-        exonsInRange = exons.keys()
+        exonsInRange = list(exons.keys())
 
         if len(exonsInRange) > 0:
             if strand == 1:
@@ -134,7 +134,7 @@ def createJunctions(fileId, exonFile):
                         if max(x[1] for x in exonsInRange) == endPos:
                             break
                         # otherwise move over 1 exon and repeat
-                        exonsInRange = [x for x in exons.keys() if x[0] > startPos]
+                        exonsInRange = [x for x in list(exons.keys()) if x[0] > startPos]
                         startPos = min(x[0] for x in exonsInRange)
             else:
                 # start from end and work backwards for - strand
@@ -151,13 +151,13 @@ def createJunctions(fileId, exonFile):
                         if min(x[0] for x in exonsInRange) == endPos:
                             break
                         # otherwise move over 1 exon and repeat
-                        exonsInRange = [x for x in exons.keys() if x[1] < startPos]
+                        exonsInRange = [x for x in list(exons.keys()) if x[1] < startPos]
                         startPos = max(x[1] for x in exonsInRange)
 
     outf.close()
 
     if args.verbose:
-        print len(allJunctions)
+        print(len(allJunctions))
 
 
 if __name__ == "__main__":
@@ -183,17 +183,18 @@ if __name__ == "__main__":
     # only run for a single file
     if args.singleFile:
         if args.verbose:
-            print "running for single file", args.singleFile
+            print("running for single file", args.singleFile)
         exonObj = os.path.basename(args.singleFile)
         fileId = utils_os.getFileId(patt_exonfilename, 1,
                                     args.singleFile)  # usually something like chr# which is in the name of each created file
         createJunctions(fileId, exonObj)
     else:
         if args.verbose:
-            print "running for directory", args.exonDir
+            print("running for directory", args.exonDir)
         # or loop through files in exonDir to create junction file for each
         for exonObj in os.listdir(args.exonDir):
             if patt_exonfile.search(exonObj):  # only parse if this is an exon pickled file
                 fileId = utils_os.getFileId(patt_exonfilename, 1,
                                             exonObj)  # usually something like chr# which is in the name of each created file
-                createJunctions(fileId, exonObj)
+                if fileId == 'MT':
+                    createJunctions(fileId, exonObj)

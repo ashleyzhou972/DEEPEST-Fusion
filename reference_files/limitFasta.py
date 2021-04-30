@@ -37,12 +37,12 @@ def writeLimitedFasta(fileName):
     fileBase = os.path.splitext(os.path.basename(fileName))[0]  # name of file without extension
 
     if args.verbose:
-        print fileName
-        print fileBase
-        print args.outDir + "/" + fileBase + args.postpend
+        print(fileName)
+        print(fileBase)
+        print(args.outDir + "/" + fileBase + args.postpend)
 
-    in_handle = open(fileName, "rU")
-    out_handle = open(args.outDir + "/" + fileBase + args.postpend + ".fa", "wb")
+    in_handle = open(fileName, "r")
+    out_handle = open(args.outDir + "/" + fileBase + args.postpend + ".fa", "w")
 
     fasta_sequences = SeqIO.parse(in_handle, "fasta")
     for fasta in fasta_sequences:

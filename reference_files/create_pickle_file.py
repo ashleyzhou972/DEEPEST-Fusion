@@ -18,4 +18,4 @@ with open(args.fasta, "r") as f:
 
         junction_id_to_seq[line1.strip()] = line2.strip()
 
-pickle.dump(junction_id_to_seq, open("known_fusions.pickle", "wb"))
+pickle.dump(junction_id_to_seq, open("known_fusions.pickle", "wb"), protocol=2)
